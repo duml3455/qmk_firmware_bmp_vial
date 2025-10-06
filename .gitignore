@@ -114,3 +114,11 @@ user_song_list.h
 compile_commands.json
 .clangd/
 .cache/
+BLE-Micro-Pro/
+.build/
+*.hex
+*.bin
+*.uf2
+*.map
+.DS_Store
+Thumbs.db
