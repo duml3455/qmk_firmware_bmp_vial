@@ -16,12 +16,12 @@
 #define DIODE_DIRECTION COL2ROW
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-//#define LOCKING_SUPPORT_ENABLE
+#define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
-//#define LOCKING_RESYNC_ENABLE
+#define LOCKING_RESYNC_ENABLE
 
-//#define RGBLIGHT_SPLIT
-//#define RGBLED_NUM_DEFAULT 128
+#define RGBLIGHT_SPLIT
+#define RGBLED_NUM_DEFAULT 128
 
 #define OLED_DISPLAY_128X32
 #define OLED_DISPLAY_ADDRESS 0x3C

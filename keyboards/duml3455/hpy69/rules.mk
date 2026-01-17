@@ -6,7 +6,7 @@ BOOTLOADER			= custom
 EEPROM_DRIVER		= custom
 
 CUSTOM_MATRIX		= yes
-SPLIT_KEYBOARD		= no
+SPLIT_KEYBOARD		= yes
 SPLIT_TRANSPORT		= custom
 MOUSE_SHARED_EP		= no
 
@@ -23,7 +23,7 @@ SLEEP_LED_ENABLE	= no		# Breathing sleep LED during USB suspend
 # if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
 NKRO_ENABLE			= no		# USB Nkey Rollover
 BACKLIGHT_ENABLE	= no		# Enable keyboard backlight functionality
-RGBLIGHT_ENABLE		= no		# Enable keyboard RGB underglow
+RGBLIGHT_ENABLE		= yes		# Enable keyboard RGB underglow
 MIDI_ENABLE			= no		# MIDI support
 UNICODE_ENABLE		= no		# Unicode
 BLUETOOTH_ENABLE	= no		# Enable Bluetooth with the Adafruit EZ-Key HID
@@ -31,8 +31,8 @@ AUDIO_ENABLE		= no		# Audio output on port C6
 FAUXCLICKY_ENABLE	= no		# Use buzzer to emulate clicky switches
 
 ENCODER_ENABLE		= no
-ENCODER_MAP_ENABLE	= no
+#ENCODER_MAP_ENABLE	= no
 
-RGB_MATRIX_ENABLE	= no
+#RGB_MATRIX_ENABLE	= no
 OLED_ENABLE			= yes
 OLED_DRIVER			= ssd1306

@@ -7,6 +7,24 @@
         "pid": "0x0000",
         "vid": "0xFEED"
     },
+    "rgblight": {
+        "led_count": 127,
+        "animations": {
+            "breathing"         : true,
+            "rainbow_mood"      : true,
+            "rainbow_swirl"     : true,
+            "snake"             : true,
+            "knight"            : true,
+            "christmas"         : true,
+            "static_gradient"   : true,
+            "rgb_test"          : true,
+            "alternating"       : true,
+            "twinkle"           : true
+        }
+    },
+    "ws2812": {
+        "pin": 255
+    },
     "matrix_pins":{
         "cols": [ 15, 14, 13, 12, 11, 10, 9, 8 ],
         "rows": [ 16, 17, 18, 19, 20,

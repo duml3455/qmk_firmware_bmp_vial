@@ -3,16 +3,95 @@
 #include QMK_KEYBOARD_H
 #include "apidef.h"
 #include "print.h"
+
 #ifdef OLED_ENABLE
     #include "images.h"   // extern only (no data here)
     #include "bmp_status.h"
     #include "oled_driver.h"
 #endif
 
+/* keep BMP startup config minimal */
 bool bmp_config_overwrite(const bmp_api_config_t *config_on_storage, bmp_api_config_t *keyboard_config) {
     ((bmp_api_config_t *)keyboard_config)->startup = 0;
     return true;
 }
+
+/* custom keys:
+   - ADV_ON / ADV_OFF: allow or deny showing ADV UI
+   - SLOT_WOL / SLOT_0..SLOT_7: tell OLED which id you are about to advertise
+*/
+enum custom_keycodes {
+    ADV_ON = SAFE_RANGE, ADV_OFF,
+    SLOT_WOL, SLOT_0, SLOT_1, SLOT_2, SLOT_3, SLOT_4, SLOT_5, SLOT_6, SLOT_7
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!record->event.pressed) return true;
+    switch (keycode) {
+        case ADV_ON:  status_allow_advertising(true);  return false;
+        case ADV_OFF: status_allow_advertising(false); return false;
+
+        /* set slot index for OLED (0..7, or WOL) */
+        case SLOT_WOL: status__set_ble_slot(SLOT_WOL); return false;
+        case SLOT_0:   status__set_ble_slot(0);        return false;
+        case SLOT_1:   status__set_ble_slot(1);        return false;
+        case SLOT_2:   status__set_ble_slot(2);        return false;
+        case SLOT_3:   status__set_ble_slot(3);        return false;
+        case SLOT_4:   status__set_ble_slot(4);        return false;
+        case SLOT_5:   status__set_ble_slot(5);        return false;
+        case SLOT_6:   status__set_ble_slot(6);        return false;
+        case SLOT_7:   status__set_ble_slot(7);        return false;
+    }
+    return true;
+}
+
+/* lifecycle */
+void keyboard_post_init_user(void) { status_init(); }
+void matrix_scan_user(void)        { status_update_tick(); }
+
+#ifdef OLED_ENABLE
+
+/* pointer tables to PROGMEM images (pointers are in RAM) */
+static const uint8_t *IMG_ADV[8] = {
+    IMG_BLE_ADV_0, IMG_BLE_ADV_1, IMG_BLE_ADV_2, IMG_BLE_ADV_3,
+    IMG_BLE_ADV_4, IMG_BLE_ADV_5, IMG_BLE_ADV_6, IMG_BLE_ADV_7
+};
+static const uint8_t *IMG_CONN[8] = {
+    IMG_BLE_CONN_0, IMG_BLE_CONN_1, IMG_BLE_CONN_2, IMG_BLE_CONN_3,
+    IMG_BLE_CONN_4, IMG_BLE_CONN_5, IMG_BLE_CONN_6, IMG_BLE_CONN_7
+};
+
+oled_rotation_t oled_init_user(oled_rotation_t r) { return r; }
+
+bool oled_task_user(void) {
+    const uint8_t *img = IMG_BLE_IDLE;
+
+    if (status_is_usb_active()) {
+        img = IMG_USB;
+    } else {
+        bool    conn = status_ble_is_connected();
+        bool    adv  = status_ble_is_advertising();
+        uint8_t slot = status_ble_slot_index(); /* 0..7 valid, 0xFF = WOL/unknown */
+        bool    show_adv_ui = adv || (conn && (slot > 7));
+
+        if (conn && !show_adv_ui) {
+            /* connected with valid slot -> fixed image by slot */
+            img = IMG_CONN[slot & 7];
+
+        } else if (show_adv_ui) {
+            /* keep ADV simple: either WOL or id-based (both OK) */
+            img = (slot == SLOT_WOL) ? IMG_BLE_ADV_WOL
+                                     : ((slot <= 7) ? IMG_ADV[slot & 7] : IMG_BLE_ADV_WOL);
+        } else {
+            img = IMG_BLE_IDLE;
+        }
+    }
+
+    /* write exactly one bitmap length */
+    oled_write_raw_P((const char *)img, IMG_BYTES);
+    return false;
+}
+#endif /* OLED_ENABLE */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -140,81 +219,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ┗━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┛
     )
 };
-
-enum custom_keycodes { ADV_ON = SAFE_RANGE, ADV_OFF };
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!record->event.pressed) return true;
-    switch (keycode) {
-        case ADV_ON:  status_allow_advertising(true);  return false;
-        case ADV_OFF: status_allow_advertising(false); return false;
-    }
-    return true;
-}
-
-
-// init / scan
-void keyboard_post_init_user(void) { status_init(); }
-void matrix_scan_user(void)        { status_update_tick(); }
-
-#ifdef OLED_ENABLE
-
-// pointer tables to image symbols (RAM pointers; image data stays in PROGMEM)
-static const uint8_t *IMG_ADV[8] = {
-    IMG_BLE_ADV_0, IMG_BLE_ADV_1, IMG_BLE_ADV_2, IMG_BLE_ADV_3, IMG_BLE_ADV_4, IMG_BLE_ADV_5, IMG_BLE_ADV_6, IMG_BLE_ADV_7
-};
-static const uint8_t *IMG_CONN[8] = {
-    IMG_BLE_CONN_0, IMG_BLE_CONN_1, IMG_BLE_CONN_2, IMG_BLE_CONN_3, IMG_BLE_CONN_4, IMG_BLE_CONN_5, IMG_BLE_CONN_6, IMG_BLE_CONN_7
-};
-
-oled_rotation_t oled_init_user(oled_rotation_t r) { return r; }
-
-bool oled_task_user(void) {
-    static bool     init;
-    static uint32_t last_tick;
-    static uint8_t  frame; // 0..7 animation frame
-
-    if (!init) {
-        oled_on();
-        oled_set_brightness(200); // adjust if you want
-        init = true;
-    }
-
-    // advance animation frame (~8 fps)
-    if (timer_elapsed32(last_tick) > 120) {
-        last_tick = timer_read32();
-        frame = (frame + 1) & 0x07;
-    }
-
-    const uint8_t *img = IMG_BLE_IDLE;
-
-    if (status_is_usb_active()) {
-        // USB active
-        img = IMG_USB;
-
-    } else {
-        // BLE side
-        bool    conn = status_ble_is_connected();
-        bool    adv  = status_ble_is_advertising();
-        uint8_t slot = status_ble_slot_index(); // 0=WO_L (pairing), 1..N=id-based
-
-        if (conn && !adv) {
-            // connected (id-based connection)
-            img = IMG_CONN[frame];
-
-        } else if (adv && !conn) {
-            // advertising: slot==0 means WO_L (pairing), otherwise id-based ADV
-            img = (slot == 0) ? IMG_BLE_ADV_WOL : IMG_ADV[frame];
-
-        } else {
-            // idle
-            img = IMG_BLE_IDLE;
-        }
-    }
-
-    // image arrays are in PROGMEM; cast to const char* for API
-    oled_write_raw_P((const char *)img, IMG_BYTES);
-    return false;
-}
-
-#endif
