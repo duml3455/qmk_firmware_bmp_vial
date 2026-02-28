@@ -69,11 +69,11 @@ bool oled_status_task_user(void) {
 
     if (img != prev_img || conn != prev_conn || adv != prev_adv || slot != prev_slot || out != prev_out) {
         HPY69_LOG_OLED("hpy69: oled out=%u conn=%u adv=%u slot=%u img=%p\n",
-                       (unsigned)out,
-                       (unsigned)conn,
-                       (unsigned)adv,
-                       (unsigned)slot,
-                       img);
+            (unsigned)out,
+            (unsigned)conn,
+            (unsigned)adv,
+            (unsigned)slot,
+            img);
         prev_img  = img;
         prev_conn = conn;
         prev_adv  = adv;
