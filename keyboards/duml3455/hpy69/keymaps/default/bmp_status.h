@@ -23,11 +23,8 @@ bool     status_ble_is_connected(void);
 bool     status_ble_is_advertising(void);
 uint8_t  status_ble_slot_index(void); /* 0..7 valid, 0xFF = WOL or unknown */
 
-/* setters for impl */
-void     status__set_output(output_t out);
-void     status__set_ble_connected(bool conn);
-void     status__set_ble_advertising(bool adv);
-void     status__set_ble_slot(uint8_t slot);
-
-/* policy */
-void     status_allow_advertising(bool allow);
+/* fact setters */
+void     status_set_output(output_t out);
+void     status_set_ble_connected(bool conn);
+void     status_set_ble_advertising(bool adv);
+void     status_set_ble_slot(uint8_t slot);

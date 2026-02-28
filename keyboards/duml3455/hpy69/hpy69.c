@@ -2,14 +2,15 @@
 
 #include "hpy69.h"
 
-#include "bmp.h"
-#include "bmp_settings.h"
+#include "tmk_core/protocol/bmp/bmp.h"
+#include "tmk_core/protocol/bmp/bmp_settings.h"
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-    bool cont = process_record_bmp(keycode, record);
+    /* Observe BMP custom keycodes in user code before BMP consumes them. */
+    bool cont = process_record_user(keycode, record);
 
     if (cont) {
-        cont = process_record_user(keycode, record);
+        cont = process_record_bmp(keycode, record);
     }
 
     return cont;

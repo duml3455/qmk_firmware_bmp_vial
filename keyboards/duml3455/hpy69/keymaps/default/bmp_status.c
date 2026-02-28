@@ -8,17 +8,17 @@ static volatile bool     g_adv  = false;       /* advertising flag */
 static volatile uint8_t  g_slot = SLOT_WOL;    /* 0..7 valid, 0xFF = WOL/unknown */
 
 /* keep state consistent */
-static inline void status__sanitize(void) {
+static inline void status_sanitize(void) {
     if (g_ble) g_adv = false;                  /* no advertising while connected */
     if (g_out != OUT_USB && g_out != OUT_BLE) g_out = OUT_BLE;
     if (g_slot > 7 && g_slot != SLOT_WOL) g_slot = SLOT_WOL;
 }
 
-/* setters */
-void status__set_output(output_t out)           { g_out  = out;  status__sanitize(); }
-void status__set_ble_connected(bool conn)       { g_ble  = conn; status__sanitize(); }
-void status__set_ble_advertising(bool adv)      { g_adv  = adv;  status__sanitize(); }
-void status__set_ble_slot(uint8_t slot)         { g_slot = (slot <= 7 || slot == SLOT_WOL) ? slot : SLOT_WOL; status__sanitize(); }
+/* fact setters */
+void status_set_output(output_t out)           { g_out  = out;  status_sanitize(); }
+void status_set_ble_connected(bool conn)       { g_ble  = conn; status_sanitize(); }
+void status_set_ble_advertising(bool adv)      { g_adv  = adv;  status_sanitize(); }
+void status_set_ble_slot(uint8_t slot)         { g_slot = (slot <= 7 || slot == SLOT_WOL) ? slot : SLOT_WOL; status_sanitize(); }
 
 /* getters */
 output_t status_current_output(void)            { return g_out; }
