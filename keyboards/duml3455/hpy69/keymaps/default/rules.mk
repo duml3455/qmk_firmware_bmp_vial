@@ -5,4 +5,3 @@ SRC += images.c
 SRC += bmp_status.c
 SRC += bmp_status_impl.c
 SRC += oled_status.c
-SRC += pointing.c

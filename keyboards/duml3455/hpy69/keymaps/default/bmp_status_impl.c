@@ -6,12 +6,8 @@
 
 static inline int ptr_not_null(void *p) { return p != NULL; }
 
-static inline bool status_can_read_connection(void) {
-    return BMPAPI && ptr_not_null(BMPAPI->ble.get_connection_status);
-}
-
 static uint8_t status_read_connected_slot(void) {
-    if (!status_can_read_connection()) {
+    if (!(BMPAPI && ptr_not_null(BMPAPI->ble.get_connection_status))) {
         return SLOT_WOL;
     }
 
@@ -24,28 +20,11 @@ static uint8_t status_read_connected_slot(void) {
     return (slot <= 7) ? slot : SLOT_WOL;
 }
 
-static bool status_is_ble_connected_now(void) {
-    return status_can_read_connection() && BMPAPI->ble.get_connection_status() != 0;
-}
-
 /* clamp slot to known value when advertising starts */
 static inline void adv_start_defaults(void) {
     uint8_t s = status_ble_slot_index();
     if (s > 7 && s != SLOT_WOL) {
         status_set_ble_slot(SLOT_WOL);
-    }
-}
-
-static void status_sync_connected_state(void) {
-    if (!status_can_read_connection()) {
-        return;
-    }
-
-    if (status_is_ble_connected_now()) {
-        status_set_ble_connected(true);
-        status_set_ble_slot(status_read_connected_slot());
-    } else {
-        status_set_ble_connected(false);
     }
 }
 
@@ -84,7 +63,8 @@ static bmp_error_t on_bmp_event(bmp_api_event_t ev) {
         case BLE_CONNECTED:
             status_set_output(OUT_BLE);
             status_set_ble_advertising(false);
-            status_sync_connected_state();
+            status_set_ble_connected(true);
+            status_set_ble_slot(status_read_connected_slot());
             break;
 
         case BLE_DISCONNECTED:
@@ -111,5 +91,5 @@ void status_init(void) {
 
 /* tick: drop "connected" if link is gone */
 void status_update_tick(void) {
-    status_sync_connected_state();
+    /* Event-driven by design to avoid high-frequency BLE polling. */
 }

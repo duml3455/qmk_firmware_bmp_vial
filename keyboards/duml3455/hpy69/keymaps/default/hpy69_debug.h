@@ -14,9 +14,3 @@
 #else
 #    define HPY69_LOG_OLED(...) ((void)0)
 #endif
-
-#ifdef HPY69_DEBUG_POINTING
-#    define HPY69_LOG_POINTING(...) uprintf(__VA_ARGS__)
-#else
-#    define HPY69_LOG_POINTING(...) ((void)0)
-#endif
