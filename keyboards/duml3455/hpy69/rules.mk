@@ -2,6 +2,8 @@
 MCU                     = cortex-m4
 MCU_LDSCRIPT            = nrf52840_bmp
 PLATFORM_KEY            = bmp
+
+# compile options
 export SKIP_GIT         := yes
 override PROTOCOL_DIR   := $(TMK_PATH)/protocol
 EXTRAINCDIRS            += $(TMK_PATH)/protocol/bmp
@@ -15,14 +17,13 @@ LDFLAGS                 += -L$(TMK_PATH)/protocol/bmp
 BOOTLOADER              = custom
 EEPROM_DRIVER           = custom
 
+# Keyboard Features
 CUSTOM_MATRIX           = yes
 SPLIT_KEYBOARD          = yes
 SPLIT_TRANSPORT         = custom
 MOUSE_SHARED_EP         = no
 
 # Build Options
-#	change yes to no to disable
-#
 BOOTMAGIC_ENABLE        = yes
 MOUSEKEY_ENABLE         = yes		# Mouse keys
 EXTRAKEY_ENABLE         = yes		# Audio control and System control

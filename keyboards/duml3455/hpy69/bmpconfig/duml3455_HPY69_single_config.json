@@ -1,0 +1,63 @@
+{
+    "config": {
+        "version": 2,
+        "device_info": {
+            "vid": "0xFEED",
+            "pid": "0x0000",
+            "name": "HPY69",
+            "manufacture": "duml3455"
+        },
+        "matrix": {
+            "rows": 10,
+            "cols": 8,
+            "layer": 8,
+            "device_rows": 5,
+            "device_cols": 8,
+            "debounce": 1,
+            "is_left_hand": 1,
+            "diode_direction": 4,
+            "row_pins": [
+                16,
+                17,
+                18,
+                19,
+                20
+            ],
+            "col_pins": [
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8
+            ]
+        },
+        "mode": "SINGLE",
+        "startup": 0,
+        "peripheral": {
+            "max_interval": 30,
+            "min_interval": 30,
+            "slave_latency": 16
+        },
+        "central": {
+            "max_interval": 30,
+            "min_interval": 30,
+            "slave_latency": 0
+        },
+        "led": {
+            "num": 127
+        },
+        "reserved": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+    }
+}
