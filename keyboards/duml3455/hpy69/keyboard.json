@@ -30,27 +30,6 @@
         }
     },
 
-    "encoder": {
-        "rotary": [
-            {
-                "pin_a": "NO_PIN",
-                "pin_b": "NO_PIN"
-            },
-            {
-                "pin_a": "NO_PIN",
-                "pin_b": "NO_PIN"
-            },
-            {
-                "pin_a": "NO_PIN",
-                "pin_b": "NO_PIN"
-            },
-            {
-                "pin_a": "NO_PIN",
-                "pin_b": "NO_PIN"
-            }
-        ]
-    },
-
     "matrix_pins":{
         "rows": [ 16, 17, 18, 19, 20,
                   16, 17, 18, 19, 20 ],
