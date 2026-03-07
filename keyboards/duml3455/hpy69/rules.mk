@@ -5,6 +5,7 @@ PLATFORM_KEY            = bmp
 
 # compile options
 export SKIP_GIT         := yes
+override GIT_DESCRIBE   := hpy69-local
 override PROTOCOL_DIR   := $(TMK_PATH)/protocol
 EXTRAINCDIRS            += $(TMK_PATH)/protocol/bmp
 EXTRAINCDIRS            += $(TMK_PATH)/protocol/bmp/cli

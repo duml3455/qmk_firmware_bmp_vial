@@ -10,6 +10,7 @@
 #define THIS_DEVICE_COLS 8
 #define IS_LEFT_HAND  true
 #define BMP_DEFAULT_MODE SINGLE
+#define BMP_USE_DEFAULT_VIAL_CONFIG
 #define ACTION_DEBUG
 /* key matrix size */
 
