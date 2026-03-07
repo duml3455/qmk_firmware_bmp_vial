@@ -39,6 +39,7 @@ static bool process_ble_oled_keys(uint16_t keycode, keyrecord_t *record) {
 
 /* Apply specific key handling before falling through to normal processing. */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+#if HPY69_ENABLE_SHIFT_SPACE_LNG2
     /* Left Shift + Space sends KC_LNG2 before Space. */
     if (keycode == KC_SPC && record->event.pressed && (get_mods() & MOD_BIT(KC_LSFT))) {
         uint8_t mods = get_mods();
@@ -48,6 +49,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_mods(mods);
         send_keyboard_report();
     }
+#endif
 
     return process_ble_oled_keys(keycode, record);
 }
