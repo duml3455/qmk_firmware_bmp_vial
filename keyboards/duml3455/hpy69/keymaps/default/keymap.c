@@ -128,11 +128,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //┏━Col2Row━┳━Col2Row━┳━Row2Col━┳━Col2Row━┳━Row2Col━┳━Col2Row━┳━Row2Col━┳━Col2Row━┳━Row2Col━┳━Col2Row━┳━Row2Col━┳━Col2Row━┳━Row2Col━┳━Col2Row━┳━Row2Col━┓
         KC_TRNS,  ADV_ID1,  ADV_ID2,  ADV_ID3,  ADV_ID4,  ADV_ID5,  ADV_ID6,  ADV_ID7,  KC_NO,    KC_NO,    ADV_ID0,  KC_NO,    KC_NO,    KC_NO,    MO(3),
     //┣━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━┫
-        KC_TRNS,  KC_NO,   EN_WEBBT, DIS_WEBBT, KC_NO,    KC_NO,    KC_NO,    SEL_USB,  KC_NO,    KC_NO,    AD_WO_L,  KC_NO,    KC_NO,              KC_TRNS,
+        KC_TRNS, KC_BTN2,KC_MS_UP,KC_BTN1,KC_MS_WH_UP,KC_MS_WH_DOWN,SEL_BLE,  SEL_USB,  KC_NO,    KC_NO,    AD_WO_L,  KC_NO,    KC_NO,              KC_TRNS,
     //┣━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━┫
-        KC_TRNS,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    DISABLE_KEY_OS_OVERRIDE,ENABLE_US_KEY_ON_JP_OS_OVERRIDE,KC_NO,KC_NO,KC_NO,KC_NO,KC_TRNS,
+        KC_TRNS,KC_MS_LEFT,KC_MS_DOWN,KC_MS_RIGHT,KC_BSPC,KC_DEL,   DISABLE_KEY_OS_OVERRIDE,ENABLE_US_KEY_ON_JP_OS_OVERRIDE,KC_NO,KC_NO,KC_NO,KC_NO, KC_TRNS,
     //┣━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━┫
-        KC_TRNS,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    SEL_BLE,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_TRNS,            KC_TRNS,
+        KC_TRNS,KC_MS_WH_UP,KC_BTN3,KC_MS_WH_DOWN,KC_MS_WH_LEFT,KC_MS_WH_RIGHT,EN_WEBBT, DIS_WEBBT,KC_NO,KC_NO,KC_NO, KC_NO,    KC_TRNS,            KC_TRNS,
     //┣━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━┫
         KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS
     //┗━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┛
