@@ -11,11 +11,11 @@
             "rows": 10,
             "cols": 8,
             "layer": 8,
-            "device_rows": 10,
+            "device_rows": 5,
             "device_cols": 8,
             "debounce": 1,
             "is_left_hand": 1,
-            "diode_direction": 0,
+            "diode_direction": 4,
             "row_pins": [
                 16,
                 17,
@@ -40,7 +40,7 @@
             ]
         },
         "mode": "SINGLE",
-        "startup": 1,
+        "startup": 0,
         "peripheral": {
             "max_interval": 30,
             "min_interval": 30,
