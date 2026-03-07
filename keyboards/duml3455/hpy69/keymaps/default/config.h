@@ -13,8 +13,8 @@
 #define OLED_BRIGHTNESS 96
 
 /* Enable/disable "Left Shift + Space sends KC_LNG2". */
-/* Enable   define HPY69_ENABLE_SHIFT_SPACE_LNG2 1 */
-/* disable  define HPY69_ENABLE_SHIFT_SPACE_LNG2 0 */
+/* Enable  =  define HPY69_ENABLE_SHIFT_SPACE_LNG2 1 */
+/* disable =  define HPY69_ENABLE_SHIFT_SPACE_LNG2 0 */
 #ifndef HPY69_ENABLE_SHIFT_SPACE_LNG2
 #    define HPY69_ENABLE_SHIFT_SPACE_LNG2 1
 #endif
