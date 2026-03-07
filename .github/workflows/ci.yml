@@ -39,6 +39,9 @@ jobs:
         persist-credentials: false
         submodules: recursive
 
+    - name: Install Python requirements
+      run: /opt/uv/tools/qmk/bin/python3 -m pip install -r requirements.txt
+
     - name: Build
       id: build
       run: |
@@ -76,6 +79,9 @@ jobs:
       with:
         persist-credentials: false
         submodules: recursive
+
+    - name: Install Python requirements
+      run: /opt/uv/tools/qmk/bin/python3 -m pip install -r requirements.txt
 
     - name: Build
       id: build
